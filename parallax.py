@@ -3,34 +3,34 @@ WIDTH = 800
 HEIGHT = 400
 
 # create the back layer
-back = Actor('double_back')
-back.topleft = 0, 0
-back.speed = 1
+layer_back = Actor('image_back')
+layer_back.topleft = 0, 0
+layer_back.speed = 1
 
 #create the middle layer
-middle = Actor('double_middle')
-middle.topleft = 0, 0
-middle.speed = 3
+layer_middle = Actor('image_middle')
+layer_middle.topleft = 0, 0
+layer_middle.speed = 3
 
 #create the front layer
-front = Actor('double_front')
-front.topleft = 0, 0
-front.speed = 5
+layer_front = Actor('image_front')
+layer_front.topleft = 0, 0
+layer_front.speed = 5
 
-#add images to list
-images = [back,middle,front]
+#add layers to list
+layers = [layer_back,layer_middle,layer_front]
 
 def update():
-    for i in images:
-        # advance each layer
-        i.left -= i.speed
-        # if layer has moved beyond the left of the screen...
-        if i.left <= (WIDTH * -1):
-            # ...move back to the right of the screen
-            i.left = 0
+    for l in layers:
+        # move each layer to the left
+        l.left -= l.speed
+        # if the layer has moved far enough to the left
+        # then reset the layers position
+        if l.right <= WIDTH:
+            l.left = 0
 
 def draw():
     screen.clear()
     # draw all images in the image list
-    for i in images:
-        i.draw()
+    for l in layers:
+        l.draw()
